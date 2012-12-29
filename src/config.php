@@ -1,5 +1,11 @@
 <?php
 
+// Application username (authentication)
+const APP_USER = 'admin';
+
+// Application password (authentication)
+const APP_PASSWORD = 'admin';
+
 // Your email address, used to receive notification when you got a call or a sms
 const MAIL_ADDRESS = 'youpi@localhost';
 

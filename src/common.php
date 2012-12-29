@@ -1,12 +1,29 @@
 <?php
 
 
-function handler($name, \Closure $handler)
+function auth()
 {
-    if (isset($_GET['handler']) && $_GET['handler'] === $name) {
+    if (! isset($_SERVER['PHP_AUTH_USER']) || ($_SERVER['PHP_AUTH_PW'] != APP_PASSWORD || $_SERVER['PHP_AUTH_USER'] != APP_USER)) {
 
-        $handler();
+        header('WWW-Authenticate: Basic realm="Nomadic Phone Authentication"');
+        header('HTTP/1.0 401 Unauthorized');
+        echo 'Auth failed';
+        exit;
     }
+}
+
+
+function handler($name, \Closure $callback)
+{
+    $exclude_handlers = array('receive-call', 'callback-call', 'receive-sms', 'callback-sms');
+    $handler = isset($_GET['handler']) ? $_GET['handler'] : 'default';
+
+    if (! in_array($handler, $exclude_handlers)) {
+
+        auth();
+    }
+
+    if ($handler === $name) $callback();
 }
 
 

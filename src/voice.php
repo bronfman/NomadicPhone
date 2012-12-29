@@ -313,99 +313,102 @@ handler('incoming-calls', function() {
 });
 
 
-db_init();
+handler('default', function() {
 
-$incall = incall_read();
+    db_init();
 
-$capability = new Services_Twilio_Capability(ACCOUNT_SID, AUTH_TOKEN);
+    $incall = incall_read();
 
-if ($incall['action'] === 'client') {
+    $capability = new Services_Twilio_Capability(ACCOUNT_SID, AUTH_TOKEN);
 
-    $capability->allowClientIncoming(CLIENT_NAME);
-}
+    if ($incall['action'] === 'client') {
 
-$token = $capability->generateToken();
-
-response_html('
-    <div class="page-header"><h1>Incoming calls</h1></div>
-
-    <h2>Choose how to handle incoming calls</h2>
-
-    <form class="well" action="?handler=incoming-calls" method="post">
-        <label class="radio"><input '.($incall['action'] === 'recording' ? 'checked="checked"' : '').' type="radio" name="incoming-call" value="recording"/>Enable recording</label>
-        <label class="radio"><input '.($incall['action'] === 'client' ? 'checked="checked"' : '').' type="radio" name="incoming-call" value="client"/>Receive here</label>
-        <label class="radio"><input '.($incall['action'] === 'redirect' ? 'checked="checked"' : '').' type="radio" name="incoming-call" value="redirect"/>Redirect to this number:</label>
-        <input type="tel" name="redirect_number" placeholder="+123456789" value="'.$incall['redirect_number'].'"/>
-        <div>
-            <button type="submit" class="btn btn-success">Save</button>
-        </div>
-    </form>
-
-    <h2>Inbound call</h2>
-    <form class="well">
-        <div>
-        <button type="button" id="btn-answer" disabled="disabled" class="btn btn-success" onclick="answer();"><i class="icon-headphones icon-white"></i> Answer</button>
-        <button type="button" id="btn-hangup" disabled="disabled" class="btn btn-danger" onclick="hangup();"><i class="icon-off icon-white"></i> Hangup</button>
-        </div>
-    </form>
-
-    <h2>Activity</h2>
-    <pre id="log">Waiting...</pre>
-
-    <script type="text/javascript">
-
-    var connection = null;
-
-    $(document).ready(function() {
-
-        Twilio.Device.setup("'.$token.'");
-    });
-
-    Twilio.Device.ready(function (device) {
-
-        $("#log").text("Ready");
-    });
-
-    Twilio.Device.error(function (error) {
-
-        $("#log").text("Error: " + error.message);
-    });
-
-    Twilio.Device.connect(function (conn) {
-
-        $("#log").text("Successfully established call");
-    });
-
-    Twilio.Device.disconnect(function (conn) {
-
-        $("#log").text("Call ended");
-    });
-
-    Twilio.Device.incoming(function (conn) {
-
-        $("#log").text("Incoming connection from " + conn.parameters.From);
-
-        $("#btn-hangup").removeAttr("disabled");
-        $("#btn-answer").removeAttr("disabled");
-
-        connection = conn;
-    });
-
-    function hangup() {
-
-        $("#btn-hangup").attr("disabled", "disabled");
-        $("#btn-answer").attr("disabled", "disabled");
-
-        Twilio.Device.disconnectAll();
-        connection = null;
+        $capability->allowClientIncoming(CLIENT_NAME);
     }
 
-    function answer() {
+    $token = $capability->generateToken();
 
-        $("#btn-answer").attr("disabled", "disabled");
+    response_html('
+        <div class="page-header"><h1>Incoming calls</h1></div>
 
-        if (connection) connection.accept();
-    }
+        <h2>Choose how to handle incoming calls</h2>
 
-    </script>
-');
+        <form class="well" action="?handler=incoming-calls" method="post">
+            <label class="radio"><input '.($incall['action'] === 'recording' ? 'checked="checked"' : '').' type="radio" name="incoming-call" value="recording"/>Enable recording</label>
+            <label class="radio"><input '.($incall['action'] === 'client' ? 'checked="checked"' : '').' type="radio" name="incoming-call" value="client"/>Receive here</label>
+            <label class="radio"><input '.($incall['action'] === 'redirect' ? 'checked="checked"' : '').' type="radio" name="incoming-call" value="redirect"/>Redirect to this number:</label>
+            <input type="tel" name="redirect_number" placeholder="+123456789" value="'.$incall['redirect_number'].'"/>
+            <div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+
+        <h2>Inbound call</h2>
+        <form class="well">
+            <div>
+            <button type="button" id="btn-answer" disabled="disabled" class="btn btn-success" onclick="answer();"><i class="icon-headphones icon-white"></i> Answer</button>
+            <button type="button" id="btn-hangup" disabled="disabled" class="btn btn-danger" onclick="hangup();"><i class="icon-off icon-white"></i> Hangup</button>
+            </div>
+        </form>
+
+        <h2>Activity</h2>
+        <pre id="log">Waiting...</pre>
+
+        <script type="text/javascript">
+
+        var connection = null;
+
+        $(document).ready(function() {
+
+            Twilio.Device.setup("'.$token.'");
+        });
+
+        Twilio.Device.ready(function (device) {
+
+            $("#log").text("Ready");
+        });
+
+        Twilio.Device.error(function (error) {
+
+            $("#log").text("Error: " + error.message);
+        });
+
+        Twilio.Device.connect(function (conn) {
+
+            $("#log").text("Successfully established call");
+        });
+
+        Twilio.Device.disconnect(function (conn) {
+
+            $("#log").text("Call ended");
+        });
+
+        Twilio.Device.incoming(function (conn) {
+
+            $("#log").text("Incoming connection from " + conn.parameters.From);
+
+            $("#btn-hangup").removeAttr("disabled");
+            $("#btn-answer").removeAttr("disabled");
+
+            connection = conn;
+        });
+
+        function hangup() {
+
+            $("#btn-hangup").attr("disabled", "disabled");
+            $("#btn-answer").attr("disabled", "disabled");
+
+            Twilio.Device.disconnectAll();
+            connection = null;
+        }
+
+        function answer() {
+
+            $("#btn-answer").attr("disabled", "disabled");
+
+            if (connection) connection.accept();
+        }
+
+        </script>
+    ');
+});

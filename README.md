@@ -66,27 +66,34 @@ Installation
 2. Setup your Twilio Application
 
   - Voice request URL: http://yourwebsite/?handler=receive-call
-  - Voice Status callback URL: http://yourwebsite/?handler=callback-call
+  - Voice status callback URL: http://yourwebsite/?handler=callback-call
   - SMS request URL: http://yourwebsite/?handler=receive-sms
-  - SMS Status callback URL: http://yourwebsite/?handler=callback-sms
+  - SMS status callback URL: http://yourwebsite/?handler=callback-sms
 
 3. Copy all PHP scripts inside the directory of your choice
 4. Make this directory writeable
 5. Change values inside the file config.php
-6. Protect access by a .htaccess
-7. Enjoy!
+6. Enjoy!
 
 Screenshots
 -----------
 
-
+### Incoming calls
 
 ![Incoming Calls](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/incoming_calls.png "Incoming calls")
 
+### Make a call
+
 ![Make a call](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/make_call.png "Make a call")
+
+### Calls history
 
 ![Calls history](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/calls_history.png "Calls history")
 
+### Send a SMS
+
 ![Send a SMS](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/send_sms.png "Send a SMS")
+
+### SMS history
 
 ![SMS history](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/sms_history.png "SMS history")
