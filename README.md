@@ -40,6 +40,7 @@ Features
 - Receive SMS (only for some countries)
 - Email notification when you got a call or a new SMS
 - Display GeoLocation of SMS and calls when possible
+- Access protected by a password (HTTP Basic Authentication)
 - Free Software (License GPLv2)
 
 Requirements
