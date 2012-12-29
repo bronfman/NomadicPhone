@@ -26,7 +26,7 @@ Why use this webapp?
 
 - By example, I have a bank account in France and another one in Canada, so I need a local phone number for each country
 - I want to call my family from oversea but I don't like Skype and my mum don't know how to use Skype, my mum can use a real phone...
-- Use a local Twilio phone number and make calls locally with your browser
+- Use a local Twilio phone number for each country and make calls locally with your browser
 
 Features
 --------
