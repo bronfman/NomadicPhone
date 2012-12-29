@@ -3,6 +3,19 @@
 
 function auth()
 {
+    /* OVH Hosting fix, they don't set PHP_AUTH_USER, add this .htaccess
+
+    <IfModule mod_rewrite.c>
+        RewriteEngine on
+        RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization},L]
+    </IfModule>
+
+    */
+    if (isset($_SERVER['REMOTE_USER'])) {
+
+        list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', base64_decode(substr($_SERVER['REMOTE_USER'], 6)));
+    }
+
     if (! isset($_SERVER['PHP_AUTH_USER']) || ($_SERVER['PHP_AUTH_PW'] != APP_PASSWORD || $_SERVER['PHP_AUTH_USER'] != APP_USER)) {
 
         header('WWW-Authenticate: Basic realm="Nomadic Phone Authentication"');
