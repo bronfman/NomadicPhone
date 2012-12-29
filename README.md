@@ -69,5 +69,20 @@ Installation
 3. Copy all PHP scripts inside the directory of your choice
 4. Make this directory writeable
 5. Change values inside the file config.php
-6. Enjoy!
+6. Protect access by a .htaccess
+7. Enjoy!
 
+Screenshots
+-----------
+
+
+
+![Incoming Calls](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/incoming_calls.png "Incoming calls")
+
+![Make a call](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/make_call.png "Make a call")
+
+![Calls history](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/calls_history.png "Calls history")
+
+![Send a SMS](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/send_sms.png "Send a SMS")
+
+![SMS history](https://raw.github.com/fguillot/NomadicPhone/master/screenshots/sms_history.png "SMS history")
