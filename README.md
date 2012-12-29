@@ -45,7 +45,7 @@ Features
 Requirements
 ------------
 
-- A webserver to host few PHP scripts
+- A webserver to host PHP scripts
 - PHP >= 5.3
 - PDO (Sqlite)
 - HTML5 browser
