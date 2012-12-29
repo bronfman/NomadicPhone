@@ -45,10 +45,12 @@ Features
 Requirements
 ------------
 
+- A webserver to host few PHP scripts
 - PHP >= 5.3
 - PDO (Sqlite)
 - HTML5 browser
 - Headphone or integrated micro (work on a Macbook Air)
+- Twilio Account
 
 Todo
 ----
