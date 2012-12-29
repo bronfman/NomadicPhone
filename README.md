@@ -39,6 +39,7 @@ Features
 - Send a SMS to any phone number
 - Receive SMS (only for some countries)
 - Email notification when you got a call or a new SMS
+- Display GeoLocation of SMS and calls when possible
 - Free Software (License GPLv2)
 
 Requirements
@@ -52,6 +53,9 @@ Requirements
 Todo
 ----
 
+- Add a blacklist
+- Add contacts
+- Choose how to handle an incoming call when a contact call you
 - At the moment, this project is a quick and dirty PHP script :)
 - Make a real webapp, not just a proof of concept
 
